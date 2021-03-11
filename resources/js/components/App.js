@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NavBar from './NavBar';
+import Products from './Products';
 
 function App() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">App Component</div>
+        <div>
+            <Router basename={window.location.pathname || ""}>
+                <NavBar />
 
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
+                <Switch>
+                    <Route exact path='/products' component={Products} />
+                </Switch>
+            </Router>
         </div>
     );
 }

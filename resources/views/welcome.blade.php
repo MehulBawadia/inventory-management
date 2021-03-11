@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-gray-200">
     <div id="root">
         <App></App>
     </div>
