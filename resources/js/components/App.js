@@ -11,6 +11,7 @@ function App() {
                 <NavBar />
 
                 <Switch>
+                    <Route exact path='/' />
                     <Route exact path='/products' component={Products} />
                 </Switch>
             </Router>
