@@ -13,10 +13,9 @@ function App() {
                 <NavBar />
 
                 <Switch>
-                    <Route exact path='/' />
-                    <Route exact path='/products' component={Products} />
-                    <Route exact path='/products/create' component={AddProduct} />
-                    <Route exact path='/products/:id/edit' component={EditProduct} />
+                    <Route exact path='/' component={Products} />
+                    <Route exact path='/create' component={AddProduct} />
+                    <Route exact path='/:id/edit' component={EditProduct} />
                 </Switch>
             </Router>
         </div>

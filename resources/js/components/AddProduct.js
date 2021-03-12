@@ -25,7 +25,7 @@ const AddProduct = () => {
 
     useEffect(() => {
         if (submitted) {
-            history.push('/products');
+            history.push('/');
         }
     }, [submitted]);
 
