@@ -45,6 +45,8 @@ const Products = () => {
         <div className="container mx-auto">
             <div className="flex py-3">
                 <h1 className="text-3xl font-bold text-blue-500">List of All Products</h1>
+
+                <Link to="/products/create" className="ml-3 px-3 py-1 rounded bg-indigo-300 text-indigo-900 hover:bg-indigo-500">Add Product</Link>
             </div>
 
             <table className="w-full border border-gray-300">
