@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './NavBar';
 import Products from './Products';
 import AddProduct from './AddProduct';
+import EditProduct from './EditProduct';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route exact path='/' />
                     <Route exact path='/products' component={Products} />
                     <Route exact path='/products/create' component={AddProduct} />
+                    <Route exact path='/products/:id/edit' component={EditProduct} />
                 </Switch>
             </Router>
         </div>

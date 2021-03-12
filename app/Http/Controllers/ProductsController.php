@@ -28,4 +28,40 @@ class ProductsController extends Controller
             'message' => 'Product added!'
         ]);
     }
+
+    public function show($id)
+    {
+        $product = Product::find($id);
+        if (! $product) {
+            return response()->json([
+                'message' => 'No product found.'
+            ]);
+        }
+
+        return response()->json([
+            'data' => $product->toArray()
+        ]);
+    }
+
+    public function update($id)
+    {
+        $data = request()->validate([
+            'name' => 'required',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0'
+        ]);
+
+        $data['stock_available'] = $data['stock'];
+        $product = Product::find($id);
+        if (! $product) {
+            return response()->json([
+                'message' => 'No product found.'
+            ]);
+        }
+        $product->update($data);
+
+        return response()->json([
+            'message' => 'Product added!'
+        ]);
+    }
 }
