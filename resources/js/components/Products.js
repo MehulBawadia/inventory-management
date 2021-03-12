@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Api from '../Api';
 import AppContainer from './AppContainer';
 
@@ -16,10 +15,6 @@ const Products = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
-
-    const deleteProduct = (id) => {
-        console.log(id);
-    }
 
     const renderProducts = () => {
         if (! products) {
