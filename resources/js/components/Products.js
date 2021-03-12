@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Api from '../Api';
+import AppContainer from './AppContainer';
 
 const Products = () => {
     const [products, setProducts] = useState(null);
@@ -60,13 +61,7 @@ const Products = () => {
     }
 
     return (
-        <div className="container mx-auto">
-            <div className="flex py-3">
-                <h1 className="text-3xl font-bold text-blue-500">List of All Products</h1>
-
-                <Link to="/create" className="ml-3 px-3 py-1 rounded bg-indigo-300 text-indigo-900 hover:bg-indigo-500">Add Product</Link>
-            </div>
-
+        <AppContainer pageTitle="List of All Products" pageLink="/create" pageLinkText="Add Product">
             <table className="w-full border border-gray-300">
                 <thead className="bg-indigo-400 text-white text-sm tracking-wider">
                     <tr>
@@ -78,7 +73,7 @@ const Products = () => {
                 </thead>
                 <tbody>{renderProducts()}</tbody>
             </table>
-        </div>
+        </AppContainer>
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Api from '../Api';
+import AppContainer from './AppContainer';
 
 const EditProduct = () => {
     const { id } = useParams();
@@ -41,11 +42,7 @@ const EditProduct = () => {
     }, [submitted])
 
     return (
-        <div className="container mx-auto">
-            <div className="flex py-3">
-                <h1 className="text-3xl font-bold text-blue-500">Edit Product</h1>
-            </div>
-
+        <AppContainer  pageTitle="Edit Product" pageLink="/" pageLinkText="All Products">
             <div className="mt-5 flex flex-col">
                 <label htmlFor="name" className="text-sm text-gray-700 tracking-wider">Name:</label>
                 <input type="text" id="name" className="border border-gray-300 rounded outline-none focus:ring bg-white pl-2 py-2 text-sm w-1/2" value={name} onChange={e => setName(e.target.value)} />
@@ -66,7 +63,7 @@ const EditProduct = () => {
                     {loading ? 'Editing...' : 'Edit'}
                 </button>
             </div>
-        </div>
+        </AppContainer>
     );
 };
 
