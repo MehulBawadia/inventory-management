@@ -1,24 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Api from '../Api';
 
 const Products = () => {
-    const [products, setProducts] = useState(JSON.parse(localStorage.getItem('allProducts')) || []);
+    const [products, setProducts] = useState(null);
 
-    const fetchAllProducts = async () => {
-        const response = await axios.get('/api/products');
+    useEffect(() => {
+        Api.getAllProducts().then(res => {
+            setProducts(res.data.data);
+        });
+    }, []);
 
-        setProducts(response.data.data);
+    const renderProducts = () => {
+        if (! products) {
+            return (
+                <tr>
+                    <td colSpan="4">Loading products...</td>
+                </tr>
+            );
+        }
 
-        localStorage.setItem('allProducts', JSON.stringify(response.data.data));
+        if (products.length === 0) {
+            return (
+                <tr>
+                    <td colSpan="4">No products found. Add one.</td>
+                </tr>
+            );
+        }
+
+        return products.map((product, index) => (
+            <tr className="border-b border-gray-300 bg-gray-100" key={++index}>
+                <td className="text-center py-2">{product.id}</td>
+                <td className="py-2 pl-2">{product.name}</td>
+                <td className="text-center">{product.stock_available}</td>
+                <td>
+                    <Link to={`/products/${product.id}/edit`} key={product.id} className="text-blue-500">Edit</Link>
+                </td>
+            </tr>
+        ));
     }
 
     return (
         <div className="container mx-auto">
             <div className="flex py-3">
                 <h1 className="text-3xl font-bold text-blue-500">List of All Products</h1>
-
-                <button className="ml-3 px-3 rounded bg-indigo-300 text-indigo-900 hover:bg-indigo-500" onClick={fetchAllProducts}>Fetch data</button>
             </div>
 
             <table className="w-full border border-gray-300">
@@ -30,18 +56,7 @@ const Products = () => {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {products && products.map((product, index) => {
-                        return (
-                            <tr className="border-b border-gray-300 bg-gray-100" key={++index}>
-                                <td className="text-center py-2">{product.id}</td>
-                                <td className="py-2 pl-2">{product.name}</td>
-                                <td className="text-center">{product.stock_available}</td>
-                                <td></td>
-                            </tr>
-                        )})
-                    }
-                </tbody>
+                <tbody>{renderProducts()}</tbody>
             </table>
         </div>
     );
