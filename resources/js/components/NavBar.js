@@ -9,7 +9,7 @@ const Header = () => (
                     <Link className="font-bold" to='/'>InvMgmt</Link>
                 </div>
                 <div>
-                    <Link className="text-gray-500" to='/products'>Products</Link>
+                    <Link className="text-gray-500" to='/'>Products</Link>
                 </div>
             </div>
         </div>
