@@ -6,11 +6,19 @@ import Api from '../Api';
 const Products = () => {
     const [products, setProducts] = useState(null);
 
-    useEffect(() => {
+    const fetchProducts = () => {
         Api.getAllProducts().then(res => {
             setProducts(res.data.data);
         });
+    }
+
+    useEffect(() => {
+        fetchProducts();
     }, []);
+
+    const deleteProduct = (id) => {
+        console.log(id);
+    }
 
     const renderProducts = () => {
         if (! products) {
@@ -34,8 +42,18 @@ const Products = () => {
                 <td className="text-center py-2">{product.id}</td>
                 <td className="py-2 pl-2">{product.name}</td>
                 <td className="text-center">{product.stock_available}</td>
-                <td>
+                <td className="text-center">
                     <Link to={`/products/${product.id}/edit`} key={product.id} className="text-blue-500">Edit</Link>
+                    <button
+                        className="p-0 ml-3 bg-transparent text-red-500 hover:text-red-800"
+                        onClick={() => {
+                            Api.deleteProduct(product.id).then(fetchProducts).catch(err => {
+                                alert('Failed to delete product.');
+                            });
+                        }}
+                    >
+                        Delete
+                    </button>
                 </td>
             </tr>
         ));
