@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Products = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(JSON.parse(localStorage.getItem('allProducts')) || []);
 
     const fetchAllProducts = async () => {
         const response = await axios.get('/api/products');
 
         setProducts(response.data.data);
+
+        localStorage.setItem('allProducts', JSON.stringify(response.data.data));
     }
 
     return (
