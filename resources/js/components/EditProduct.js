@@ -24,10 +24,8 @@ const EditProduct = () => {
     const updateProduct = async () => {
         setLoading(true);
         try {
-            if (! isMounted) {
-                await Api.updateProduct(id, {name, price, stock});
-                history.push('/products');
-            }
+            await Api.updateProduct(id, {name, price, stock});
+            history.push('/products');
         } catch {
             alert('Failed to edit post');
         } finally {
