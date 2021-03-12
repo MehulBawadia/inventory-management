@@ -9,18 +9,25 @@ const AddProduct = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
     const addNewProduct = async () => {
         setLoading(true);
         try {
             await Api.addProduct({name, price, stock});
-            history.push('/products');
+            setSubmitted(true);
         } catch {
             alert('Failed to add post');
         } finally {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (submitted) {
+            history.push('/products');
+        }
+    }, [submitted]);
 
     return (
         <div className="container mx-auto">

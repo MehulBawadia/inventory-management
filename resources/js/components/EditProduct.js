@@ -10,6 +10,7 @@ const EditProduct = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         Api.getSingleProduct(id).then(res => {
@@ -25,13 +26,19 @@ const EditProduct = () => {
         setLoading(true);
         try {
             await Api.updateProduct(id, {name, price, stock});
-            history.push('/products');
+            setSubmitted(true);
         } catch {
             alert('Failed to edit post');
         } finally {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (submitted) {
+            history.push('/products');
+        }
+    }, [submitted])
 
     return (
         <div className="container mx-auto">
