@@ -9,7 +9,7 @@ import EditProduct from './EditProduct';
 function App() {
     return (
         <div>
-            <Router basename={window.location.pathname || ""}>
+            <Router>
                 <NavBar />
 
                 <Switch>
